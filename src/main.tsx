@@ -7,7 +7,6 @@ import MenuPage from './pages/MenuPage';
 import AboutPage from './pages/AboutPage';
 import OffersPage from './pages/OffersPage';
 import ContactPage from './pages/ContactPage';
-import 'boxicons/css/boxicons.min.css';
 import './app/globals.css';
 
 // ── Simple hash-based router ───────────────────────────────────────
