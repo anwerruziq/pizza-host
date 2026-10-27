@@ -3,8 +3,8 @@ import { Category, Product, SiteSettings } from '../types';
 export const defaultSiteSettings: SiteSettings = {
   restaurantNameAr: 'بيتزا هاوس',
   restaurantNameEn: 'Pizza House',
-  phone: '+967 777 000 000',
-  whatsapp: '+967777000000',
+  phone: '+967 778 568 777',
+  whatsapp: '+967778568777',
   addressAr: 'اليمن - صنعاء - شارع حدة الرئيسي',
   addressEn: 'Yemen - Sana\'a - Hadda Main Street',
   openHoursAr: 'يومياً: من 11:00 صباحاً حتى 2:00 بعد منتصف الليل',
