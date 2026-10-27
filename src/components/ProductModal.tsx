@@ -19,12 +19,14 @@ import {
 } from './icons';
 
 interface ProductModalProps {
-  product: Product | null;
-  onClose: () => void;
+  product?: Product | null;
+  onClose?: () => void;
 }
 
-export default function ProductModal({ product, onClose }: ProductModalProps) {
-  const { locale, siteSettings } = useApp();
+export default function ProductModal({ product: propProduct, onClose: propOnClose }: ProductModalProps = {}) {
+  const { locale, siteSettings, selectedProduct, setSelectedProduct } = useApp();
+  const product = propProduct !== undefined ? propProduct : selectedProduct;
+  const onClose = propOnClose ?? (() => setSelectedProduct(null));
   const isAr = locale === 'ar';
 
   // Selected size code (defaults to 'M' for medium)

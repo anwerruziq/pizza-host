@@ -176,3 +176,16 @@ export const Copy = bx('bx-copy');
 
 // 🛍 Shopping Bag
 export const ShoppingBag = bx('bxs-shopping-bag');
+
+// 🏠 Home
+export const Home = bx('bxs-home');
+
+// 🎁 Gift
+export const Gift = bx('bxs-gift');
+
+// 👤 User
+export const User = bx('bxs-user');
+
+// ℹ Info
+export const Info = bx('bxs-info-circle');
+

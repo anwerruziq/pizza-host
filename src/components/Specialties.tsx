@@ -4,7 +4,7 @@ import React from 'react';
 import { useApp } from '../context/AppContext';
 import { sampleProducts } from '../data/sampleData';
 import { formatCurrency } from '../lib/formatters';
-import { ArrowLeft, ArrowRight, Plus } from './icons';
+import { Plus } from './icons';
 
 export default function Specialties() {
   const { locale, siteSettings, setSelectedProduct } = useApp();
@@ -12,23 +12,23 @@ export default function Specialties() {
 
   // 3 Signature delivered items
   const bestDelivered = [
-    sampleProducts.find((p) => p.id === 'pizza-1') || sampleProducts[0], // بيتزا هاوس
-    sampleProducts.find((p) => p.id === 'fatayer-1') || sampleProducts[8], // سوبر هاوس فطيرة
-    sampleProducts.find((p) => p.id === 'sandwich-2') || sampleProducts[18], // كريسبي دجاج
+    sampleProducts.find((p) => p.id === 'prod-pizza-1') || sampleProducts[0],
+    sampleProducts.find((p) => p.id === 'prod-fatayer-1') || sampleProducts[8] || sampleProducts[1],
+    sampleProducts.find((p) => p.id === 'prod-sandwich-2') || sampleProducts[18] || sampleProducts[2],
   ];
 
   return (
-    <section id="specialties" className="py-20 md:py-28 bg-[#0A0A0C] relative">
+    <section id="specialties" className="py-16 md:py-24 bg-[#0A0A0C] relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Signature Bracket Title (from reference) */}
-        <div className="flex justify-center mb-16">
-          <div className="inline-flex items-center px-6 py-2 rounded-full border border-[#FF7A00] text-[#FF7A00] font-bold text-sm sm:text-base tracking-wide bg-[#121214]/50 backdrop-blur-sm">
+        {/* Signature Bracket Title */}
+        <div className="flex justify-center mb-12 sm:mb-16">
+          <div className="inline-flex items-center px-6 py-2 rounded-full border border-[#FF7A00] text-[#FF7A00] font-bold text-sm sm:text-base tracking-wide bg-[#121214]/50 backdrop-blur-sm shadow-md shadow-[#FF7A00]/10">
             {isAr ? '[ الأكثر طلباً وتوصيلاً ]' : '[ Our Best Delivered ]'}
           </div>
         </div>
 
         {/* 3 Horizontal Capsule Cards (Alternating Layout) */}
-        <div className="space-y-8">
+        <div className="space-y-6 sm:space-y-8">
           {bestDelivered.map((dish, index) => {
             const isReversed = index % 2 === 1;
             const price = dish.basePrice;
@@ -37,18 +37,18 @@ export default function Specialties() {
             return (
               <div
                 key={dish.id}
-                className="relative rounded-3xl bg-[#121214] border border-[#222226] hover:border-[#FF7A00]/40 transition-all duration-300 p-6 sm:p-8 md:p-10 shadow-xl overflow-hidden group"
+                className="relative rounded-3xl bg-[#121215] border border-[#232328] hover:border-[#FF7A00]/40 transition-all duration-300 p-6 sm:p-8 md:p-10 shadow-xl overflow-hidden group"
               >
                 <div
-                  className={`flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 ${
+                  className={`flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-8 md:gap-12 ${
                     isReversed ? 'md:flex-row-reverse' : ''
                   }`}
                 >
                   {/* Dish Image (Large circular / glowing) */}
-                  <div className="relative w-48 h-48 sm:w-60 sm:h-60 md:w-64 md:h-64 shrink-0 flex items-center justify-center">
-                    <div className="absolute inset-0 rounded-full bg-[#FF7A00]/10 blur-2xl group-hover:bg-[#FF7A00]/20 transition-all duration-500 pointer-events-none" />
+                  <div className="relative w-52 h-52 sm:w-64 sm:h-64 md:w-72 md:h-72 shrink-0 flex items-center justify-center">
+                    <div className="absolute inset-0 rounded-full bg-[#FF7A00]/10 blur-2xl group-hover:bg-[#FF7A00]/25 transition-all duration-500 pointer-events-none" />
                     <img
-                      src={dish.imageUrl}
+                      src={dish.image}
                       alt={isAr ? dish.nameAr : dish.nameEn}
                       className="relative z-10 w-full h-full object-contain filter drop-shadow-[0_15px_25px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-transform duration-500"
                     />
@@ -57,7 +57,7 @@ export default function Specialties() {
                   {/* Details */}
                   <div className="flex-1 space-y-4 text-start">
                     <div className="flex items-center gap-3">
-                      <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-[#FF7A00]/15 text-[#FF7A00] border border-[#FF7A00]/30">
+                      <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#FF7A00]/15 text-[#FF7A00] border border-[#FF7A00]/30 font-lalezar">
                         {isAr ? 'خصم 20%' : '20% OFF'}
                       </span>
                       <span className="text-xs text-[#A1A1AA]">
@@ -74,7 +74,7 @@ export default function Specialties() {
                     </p>
 
                     {/* Price Tag */}
-                    <div className="flex items-baseline gap-3 pt-2">
+                    <div className="flex items-baseline gap-3 pt-1">
                       <span className="text-2xl sm:text-3xl font-black text-white font-lalezar">
                         {formatCurrency(price, locale, siteSettings.currencyCode)}
                       </span>
@@ -98,7 +98,7 @@ export default function Specialties() {
                         title={isAr ? 'اختيار الحجم والإضافات' : 'Select Size & Extras'}
                         aria-label="View options"
                       >
-                        <Plus className="w-4 h-4 text-[#FF7A00]" />
+                        <Plus size={18} className="text-[#FF7A00]" />
                       </button>
                     </div>
                   </div>

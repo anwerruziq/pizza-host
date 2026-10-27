@@ -22,48 +22,50 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <div
       onClick={() => setSelectedProduct(product)}
-      className="group relative bg-[#121214] hover:bg-[#16161A] rounded-2xl border border-[#222226] hover:border-[#FF7A00]/50 p-5 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/60 cursor-pointer overflow-hidden"
+      className="group relative bg-[#121215] hover:bg-[#16161A] rounded-3xl border border-[#232328] hover:border-[#FF7A00]/50 p-4 sm:p-5 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/70 cursor-pointer overflow-hidden"
     >
-      {/* Centered Circular Dish Image (from reference) */}
-      <div className="relative w-28 h-28 sm:w-32 sm:h-32 mx-auto my-2 rounded-full p-1.5 flex items-center justify-center">
-        {/* Glow */}
+      {/* ── Enlarged Circular Dish Image & Glow (Enhanced Size) ── */}
+      <div className="relative w-36 h-36 sm:w-44 sm:h-44 md:w-48 md:h-48 mx-auto my-2 rounded-full p-2 flex items-center justify-center shrink-0">
+        {/* Ambient Warm Glow */}
         <div className="absolute inset-0 rounded-full bg-[#FF7A00]/10 blur-xl group-hover:bg-[#FF7A00]/25 transition-all duration-300 pointer-events-none" />
-        <div className="w-full h-full rounded-full overflow-hidden border border-white/5 bg-[#0A0A0C] flex items-center justify-center">
+
+        {/* Circular Plate */}
+        <div className="w-full h-full rounded-full overflow-hidden border border-white/10 bg-[#0A0A0C] shadow-inner flex items-center justify-center p-1.5">
           <img
             src={imgError ? '/logo.png' : product.image}
             alt={name}
             onError={() => setImgError(true)}
-            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+            className="w-full h-full object-cover rounded-full group-hover:scale-110 transition-transform duration-500 filter drop-shadow-[0_8px_16px_rgba(0,0,0,0.6)]"
             loading="lazy"
           />
         </div>
 
-        {/* Small discount pill if discounted */}
+        {/* Discount Badge Pill */}
         {product.hasDiscount && (
-          <span className="absolute -top-1 -start-1 bg-[#FF7A00] text-black text-[9px] font-black px-1.5 py-0.5 rounded-full shadow-sm font-lalezar">
+          <span className="absolute top-1 start-1 bg-[#FF7A00] text-black text-[10px] sm:text-xs font-black px-2 py-0.5 rounded-full shadow-md font-lalezar tracking-wide">
             -20%
           </span>
         )}
       </div>
 
-      {/* Title & Short Description */}
-      <div className="space-y-1 text-center mt-2 flex-1">
-        <h4 className="font-lalezar text-base sm:text-lg text-white group-hover:text-[#FF7A00] transition-colors line-clamp-1">
+      {/* ── Title & Description ── */}
+      <div className="space-y-1.5 text-center mt-2 flex-1 px-1">
+        <h4 className="font-lalezar text-lg sm:text-xl text-white group-hover:text-[#FF7A00] transition-colors line-clamp-1 leading-snug">
           {name}
         </h4>
-        <p className="text-[11px] text-[#A1A1AA] line-clamp-1 leading-normal">
+        <p className="text-xs text-[#A1A1AA] line-clamp-2 leading-relaxed min-h-[32px]">
           {description}
         </p>
       </div>
 
-      {/* Bottom: Price + Small Action Button */}
-      <div className="pt-3 mt-3 border-t border-[#1E1E22] flex items-center justify-between">
+      {/* ── Bottom: Price + Action Button ── */}
+      <div className="pt-3 mt-3 border-t border-[#1F1F24] flex items-center justify-between">
         <div className="flex items-baseline gap-1.5">
-          <span className="text-sm sm:text-base font-black text-white font-lalezar">
+          <span className="text-base sm:text-lg font-black text-white font-lalezar tracking-tight">
             {formatCurrency(price, locale, siteSettings.currencyCode)}
           </span>
           {product.hasDiscount && (
-            <span className="text-[10px] text-[#71717A] line-through">
+            <span className="text-xs text-[#71717A] line-through font-medium">
               {formatCurrency(originalPrice, locale, siteSettings.currencyCode)}
             </span>
           )}
@@ -74,11 +76,11 @@ export default function ProductCard({ product }: ProductCardProps) {
             e.stopPropagation();
             setSelectedProduct(product);
           }}
-          className="w-7 h-7 rounded-lg bg-[#1E1E24] group-hover:bg-[#FF7A00] text-[#A1A1AA] group-hover:text-black flex items-center justify-center transition-all cursor-pointer"
+          className="w-8 h-8 rounded-xl bg-[#1E1E24] group-hover:bg-[#FF7A00] text-[#A1A1AA] group-hover:text-black flex items-center justify-center transition-all cursor-pointer shadow-sm hover:scale-105 active:scale-95"
           title={locale === 'ar' ? 'طلب' : 'Order'}
           aria-label="Order dish"
         >
-          <Plus className="w-3.5 h-3.5" />
+          <Plus size={16} />
         </button>
       </div>
     </div>

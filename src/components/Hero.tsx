@@ -31,16 +31,16 @@ export default function Hero() {
                 ) : (
                   <>
                     Experience the <br />
-                    <span className="text-[#FF7A00]">True Taste</span> <br />
-                    of Pizza House
+                    <span className="text-[#FF7A00]">Taste of</span> <br />
+                    Pizza House
                   </>
                 )}
               </h1>
 
               <p className="text-sm sm:text-base text-[#A1A1AA] max-w-lg leading-relaxed">
                 {isAr
-                  ? 'عجينة طازجة يومياً، أجبان فاخرة، ومخبوزة بأفران الحطب 450°C لتستمتع بأشهى طعم مع خصم 20% فوري.'
-                  : 'Daily fresh dough, premium cheeses, and wood-fired stone oven perfection with instant 20% discount.'}
+                  ? 'أشهى بيتزا وفطائر مخبوزة على الحطب بمكونات طازجة يومياً وخصم 20%.'
+                  : 'Authentic wood-fired pizza and savory pies crafted fresh daily with 20% off.'}
               </p>
             </div>
 
