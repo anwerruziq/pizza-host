@@ -5,10 +5,12 @@ import { useApp } from '../context/AppContext';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import Specialties from '../components/Specialties';
+import MenuSection from '../components/MenuSection';
+import TestimonialsSection from '../components/TestimonialsSection';
+import ChefSection from '../components/ChefSection';
 import Footer from '../components/Footer';
 import ProductModal from '../components/ProductModal';
 import { MessageCircle } from '../components/icons';
-import QuickSections from '../components/QuickSections';
 
 function PizzeriaApp() {
   const { siteSettings, locale, selectedProduct, setSelectedProduct } = useApp();
@@ -25,16 +27,20 @@ function PizzeriaApp() {
   return (
     <div className="min-h-screen bg-[#0A0A0C] text-[#FFFFFF] flex flex-col selection:bg-[#FF7A00] selection:text-white">
       <Navbar />
-      <main className="flex-1">
+      <main className="flex-1 space-y-4">
         <Hero />
         <Specialties />
-        <QuickSections />
+        <MenuSection />
+        <TestimonialsSection />
+        <ChefSection />
       </main>
       <Footer />
+
       <ProductModal
         product={selectedProduct}
         onClose={() => setSelectedProduct(null)}
       />
+
       <a
         href={floatingWhatsAppUrl}
         target="_blank"

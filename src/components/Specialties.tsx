@@ -2,61 +2,110 @@
 
 import React from 'react';
 import { useApp } from '../context/AppContext';
-import { useRouter } from '../main';
 import { sampleProducts } from '../data/sampleData';
-import ProductCard from './ProductCard';
-import { Sparkles, ArrowLeft, ArrowRight, Flame } from './icons';
+import { formatCurrency } from '../lib/formatters';
+import { ArrowLeft, ArrowRight, Plus } from './icons';
 
 export default function Specialties() {
-  const { locale, t } = useApp();
-  const { navigate } = useRouter();
-  const isRtl = locale === 'ar';
-  const ArrowIcon = isRtl ? ArrowLeft : ArrowRight;
+  const { locale, siteSettings, setSelectedProduct } = useApp();
+  const isAr = locale === 'ar';
 
-  // Select top signature dishes from Pizza House
-  const featuredDishes = sampleProducts.filter((p) => p.isFeatured).slice(0, 4);
-
-  const goToMenu = () => {
-    navigate('menu');
-  };
+  // 3 Signature delivered items
+  const bestDelivered = [
+    sampleProducts.find((p) => p.id === 'pizza-1') || sampleProducts[0], // بيتزا هاوس
+    sampleProducts.find((p) => p.id === 'fatayer-1') || sampleProducts[8], // سوبر هاوس فطيرة
+    sampleProducts.find((p) => p.id === 'sandwich-2') || sampleProducts[18], // كريسبي دجاج
+  ];
 
   return (
-    <section id="specialties" className="py-20 sm:py-24 bg-[#0A0A0C] relative overflow-hidden border-b border-[#232328]">
-      {/* Background ambient light */}
-      <div className="absolute top-1/2 left-0 w-96 h-96 bg-[#FF7A00]/5 rounded-full blur-[140px] pointer-events-none"></div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-          <div className="space-y-3">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-[#FF7A00]/15 text-[#FF7A00] border border-[#FF7A00]/30 shadow-sm">
-              <Flame className="w-3.5 h-3.5" />
-              <span>{locale === 'ar' ? 'توصيات الشيف الخاصة' : "Chef's Recommendations"}</span>
-            </div>
-            <h2 className="font-lalezar text-3xl sm:text-5xl text-white tracking-wide">
-              {locale === 'ar' ? 'أطباق مميزة في بيتزا هاوس' : 'Pizza House Signatures'}
-            </h2>
-            <p className="text-sm sm:text-base text-[#9E9EA8] max-w-xl">
-              {locale === 'ar'
-                ? 'أكثر الأصناف طلباً وإعجاباً من قبل زبائننا الكرام، مشمولة بخصم 20% ومتوفرة بحجمين'
-                : 'Our most-loved dishes freshly baked, available with 20% discount in Medium & Large sizes'}
-            </p>
+    <section id="specialties" className="py-20 md:py-28 bg-[#0A0A0C] relative">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Signature Bracket Title (from reference) */}
+        <div className="flex justify-center mb-16">
+          <div className="inline-flex items-center px-6 py-2 rounded-full border border-[#FF7A00] text-[#FF7A00] font-bold text-sm sm:text-base tracking-wide bg-[#121214]/50 backdrop-blur-sm">
+            {isAr ? '[ الأكثر طلباً وتوصيلاً ]' : '[ Our Best Delivered ]'}
           </div>
-
-          <button
-            onClick={goToMenu}
-            className="self-start md:self-auto inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-black text-black bg-[#FF7A00] hover:bg-[#FFA133] transition-all cursor-pointer shadow-lg shadow-[#FF7A00]/20 active:scale-95 group"
-          >
-            <span>{locale === 'ar' ? 'تصفح كل القائمة (72 صنف)' : 'View All Menu (72 items)'}</span>
-            <ArrowIcon className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </button>
         </div>
 
-        {/* Featured Grid using clean ProductCard */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {featuredDishes.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+        {/* 3 Horizontal Capsule Cards (Alternating Layout) */}
+        <div className="space-y-8">
+          {bestDelivered.map((dish, index) => {
+            const isReversed = index % 2 === 1;
+            const price = dish.basePrice;
+            const originalPrice = dish.originalPrice || Math.round(dish.basePrice / 0.8);
+
+            return (
+              <div
+                key={dish.id}
+                className="relative rounded-3xl bg-[#121214] border border-[#222226] hover:border-[#FF7A00]/40 transition-all duration-300 p-6 sm:p-8 md:p-10 shadow-xl overflow-hidden group"
+              >
+                <div
+                  className={`flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 ${
+                    isReversed ? 'md:flex-row-reverse' : ''
+                  }`}
+                >
+                  {/* Dish Image (Large circular / glowing) */}
+                  <div className="relative w-48 h-48 sm:w-60 sm:h-60 md:w-64 md:h-64 shrink-0 flex items-center justify-center">
+                    <div className="absolute inset-0 rounded-full bg-[#FF7A00]/10 blur-2xl group-hover:bg-[#FF7A00]/20 transition-all duration-500 pointer-events-none" />
+                    <img
+                      src={dish.imageUrl}
+                      alt={isAr ? dish.nameAr : dish.nameEn}
+                      className="relative z-10 w-full h-full object-contain filter drop-shadow-[0_15px_25px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+
+                  {/* Details */}
+                  <div className="flex-1 space-y-4 text-start">
+                    <div className="flex items-center gap-3">
+                      <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-[#FF7A00]/15 text-[#FF7A00] border border-[#FF7A00]/30">
+                        {isAr ? 'خصم 20%' : '20% OFF'}
+                      </span>
+                      <span className="text-xs text-[#A1A1AA]">
+                        {isAr ? 'حجمين: وسط وكبير' : 'Medium & Large'}
+                      </span>
+                    </div>
+
+                    <h3 className="text-2xl sm:text-4xl font-lalezar text-white tracking-wide">
+                      {isAr ? dish.nameAr : dish.nameEn}
+                    </h3>
+
+                    <p className="text-xs sm:text-sm text-[#A1A1AA] leading-relaxed max-w-lg">
+                      {isAr ? dish.descriptionAr : dish.descriptionEn}
+                    </p>
+
+                    {/* Price Tag */}
+                    <div className="flex items-baseline gap-3 pt-2">
+                      <span className="text-2xl sm:text-3xl font-black text-white font-lalezar">
+                        {formatCurrency(price, locale, siteSettings.currencyCode)}
+                      </span>
+                      <span className="text-sm line-through text-[#71717A]">
+                        {formatCurrency(originalPrice, locale, siteSettings.currencyCode)}
+                      </span>
+                    </div>
+
+                    {/* Actions: "اطلب الآن" button + plus button */}
+                    <div className="flex items-center gap-3 pt-2">
+                      <button
+                        onClick={() => setSelectedProduct(dish)}
+                        className="px-6 py-2.5 rounded-full bg-[#FF7A00] hover:bg-[#FFA133] text-black font-bold text-xs sm:text-sm transition-all duration-200 hover:scale-105 active:scale-95 shadow-md shadow-[#FF7A00]/20 cursor-pointer"
+                      >
+                        {isAr ? 'اطلب الآن' : 'Order Now'}
+                      </button>
+
+                      <button
+                        onClick={() => setSelectedProduct(dish)}
+                        className="w-10 h-10 rounded-full border border-[#27272A] hover:border-[#FF7A00] bg-[#1A1A1E] text-white flex items-center justify-center transition-colors cursor-pointer"
+                        title={isAr ? 'اختيار الحجم والإضافات' : 'Select Size & Extras'}
+                        aria-label="View options"
+                      >
+                        <Plus className="w-4 h-4 text-[#FF7A00]" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

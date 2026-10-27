@@ -62,42 +62,19 @@ export default function MenuPage() {
   return (
     <PageLayout>
       {/* Hero Banner */}
-      <section className="relative py-16 sm:py-24 bg-[#0A0A0C] border-b border-[#232328] overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#FF7A00]/10 rounded-full blur-[150px]"></div>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-5">
-          <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-black bg-[#FF7A00]/15 text-[#FF7A00] border border-[#FF7A00]/30 shadow-sm">
-            <Tag className="w-3.5 h-3.5" />
-            <span>{locale === 'ar' ? 'خصم 20% مباشر على البيتزا والفطائر والسندوتشات' : 'Direct 20% OFF on Pizzas, Pies & Sandwiches'}</span>
+      <section className="relative py-12 bg-[#0A0A0C] border-b border-[#1E1E22] overflow-hidden text-center">
+        <div className="max-w-4xl mx-auto px-4 space-y-3 relative z-10">
+          <div className="inline-flex items-center px-4 py-1 rounded-full border border-[#FF7A00] text-[#FF7A00] font-bold text-xs tracking-wide">
+            {locale === 'ar' ? '[ قائمة الطعام ]' : '[ Our Full Menu ]'}
           </div>
-          <h1 className="font-lalezar text-4xl sm:text-6xl text-white tracking-wide leading-tight">
-            {locale === 'ar' ? 'قائمة طعام بيتزا هاوس' : 'Pizza House Complete Menu'}
+          <h1 className="font-lalezar text-3xl sm:text-5xl text-white">
+            {locale === 'ar' ? 'أشهى أطباق بيتزا هاوس' : 'Pizza House Menu'}
           </h1>
-          <p className="text-base sm:text-lg text-[#9E9EA8] max-w-2xl mx-auto">
+          <p className="text-xs sm:text-sm text-[#A1A1AA]">
             {locale === 'ar'
-              ? 'تذوق ألذ بيتزا حطب وفطائر مقرمشة وسندوتشات ساخنة وعصائر طبيعية طازجة وإضافات مميزة'
-              : 'Taste the best wood-fired pizzas, crispy pies, sizzling sandwiches, fresh natural juices and signature sides'}
+              ? 'تصفح قائمتنا الكاملة مع خصم 20% على البيتزا والفطائر والسندوتشات'
+              : 'Browse our complete menu with 20% discount on pizzas, pies and sandwiches'}
           </p>
-
-          {/* Quick Stats */}
-          <div className="flex items-center justify-center gap-6 sm:gap-10 pt-4">
-            <div className="text-center">
-              <span className="font-lalezar text-2xl sm:text-3xl text-[#FF7A00]">{sampleProducts.length}</span>
-              <span className="block text-xs text-[#9E9EA8] mt-0.5">{locale === 'ar' ? 'صنفاً شهياً' : 'Items'}</span>
-            </div>
-            <div className="w-px h-8 bg-[#232328]"></div>
-            <div className="text-center">
-              <span className="font-lalezar text-2xl sm:text-3xl text-white">5</span>
-              <span className="block text-xs text-[#9E9EA8] mt-0.5">{locale === 'ar' ? 'أقسام رئيسية' : 'Categories'}</span>
-            </div>
-            <div className="w-px h-8 bg-[#232328]"></div>
-            <div className="text-center">
-              <span className="font-lalezar text-2xl sm:text-3xl text-[#FF7A00]">20%</span>
-              <span className="block text-xs text-[#9E9EA8] mt-0.5">{locale === 'ar' ? 'خصم فوري' : 'Instant Discount'}</span>
-            </div>
-          </div>
         </div>
       </section>
 

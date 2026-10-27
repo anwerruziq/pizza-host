@@ -1,161 +1,125 @@
+'use client';
+
 import React from 'react';
 import { useApp } from '../context/AppContext';
 import { useRouter } from '../main';
-import { Flame, Sparkles, ChefHat, Clock, Award, ArrowLeft, ArrowRight, Tag, MessageCircle } from './icons';
+import { ArrowLeft, ArrowRight, ArrowUpRight } from './icons';
 
 export default function Hero() {
-  const { locale, siteSettings } = useApp();
+  const { locale } = useApp();
   const { navigate } = useRouter();
-  const isRtl = locale === 'ar';
-  const ArrowIcon = isRtl ? ArrowLeft : ArrowRight;
+  const isAr = locale === 'ar';
+  const Arrow = isAr ? ArrowLeft : ArrowRight;
 
   return (
-    <section
-      id="hero"
-      className="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-16 lg:py-24 bg-[#0A0A0C]"
-    >
-      {/* Background Ambience & Glowing Lights */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#FF7A00]/12 rounded-full blur-[140px] pointer-events-none" />
-        <div className="absolute top-1/3 right-10 w-[400px] h-[400px] bg-[#FFA133]/8 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-10 left-10 w-[350px] h-[350px] bg-[#EA580C]/10 rounded-full blur-[100px] pointer-events-none" />
-        
-        {/* Subtle radial grid texture */}
-        <div className="absolute inset-0 bg-[radial-gradient(#26262B_1px,transparent_1px)] [background-size:24px_24px] opacity-30" />
-      </div>
+    <section className="relative pt-8 pb-20 md:py-24 overflow-hidden bg-[#0A0A0C]">
+      {/* Subtle background glow */}
+      <div className="absolute top-1/4 end-1/4 w-[450px] h-[450px] bg-[#FF7A00]/10 rounded-full blur-[140px] pointer-events-none" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          {/* Main Text Content (7 cols) */}
-          <div className="lg:col-span-7 space-y-6 text-center lg:text-start">
-            {/* Tag Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#141416] border border-[#FF7A00]/40 shadow-xl text-xs sm:text-sm font-bold text-[#FF7A00]">
-              <span className="flex h-2.5 w-2.5 rounded-full bg-[#FF7A00] animate-ping" />
-              <Tag className="w-4 h-4 text-[#FF7A00]" />
-              <span className="font-heading tracking-wide">
-                {locale === 'ar' ? 'عرض خاص: خصم 20% على البيتزا والفطائر والسندوتشات' : 'Special Offer: 20% OFF Pizzas, Pies & Sandwiches'}
-              </span>
+          {/* Left Column: Heading, Subtitle, CTA & Floating Discount Pill (7 cols) */}
+          <div className="lg:col-span-7 space-y-8 text-start">
+            <div className="space-y-4">
+              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-lalezar text-white leading-[1.08] tracking-tight">
+                {isAr ? (
+                  <>
+                    تذوّق أشهى <br />
+                    <span className="text-[#FF7A00]">بيتزا على الحطب</span> <br />
+                    في بيتزا هاوس
+                  </>
+                ) : (
+                  <>
+                    Experience the <br />
+                    <span className="text-[#FF7A00]">True Taste</span> <br />
+                    of Pizza House
+                  </>
+                )}
+              </h1>
+
+              <p className="text-sm sm:text-base text-[#A1A1AA] max-w-lg leading-relaxed">
+                {isAr
+                  ? 'عجينة طازجة يومياً، أجبان فاخرة، ومخبوزة بأفران الحطب 450°C لتستمتع بأشهى طعم مع خصم 20% فوري.'
+                  : 'Daily fresh dough, premium cheeses, and wood-fired stone oven perfection with instant 20% discount.'}
+              </p>
             </div>
 
-            {/* Headline with Lalezar font */}
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-[#FFFFFF] leading-[1.1] font-heading">
-              {locale === 'ar' ? (
-                <>
-                  أهلاً بك في <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF7A00] via-[#FFA133] to-[#FFFFFF]">
-                    بيتزا هاوس
-                  </span>{' '}
-                  الأصلية
-                </>
-              ) : (
-                <>
-                  Welcome to <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF7A00] via-[#FFA133] to-[#FFFFFF]">
-                    Pizza House
-                  </span>{' '}
-                  Specialty
-                </>
-              )}
-            </h1>
-
-            {/* Subtitle */}
-            <p className="text-base sm:text-lg text-[#D4D4D8] max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
-              {locale === 'ar'
-                ? 'استمتع بأشهى تشكيلة من البيتزا الإيطالية والفطائر المورقة والسندوتشات المقرمشة والمشروبات الطازجة، مخبوزة على الحطب بعناية وبأفضل الأسعار مع خصم 20% فوري!'
-                : 'Enjoy our signature wood-fired pizzas, stuffed savory pies, crispy sandwiches and fresh juices with an instant 20% discount!'}
-            </p>
-
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+            {/* Simple Primary Button */}
+            <div className="pt-1">
               <button
                 onClick={() => navigate('menu')}
-                className="w-full sm:w-auto px-8 py-4 rounded-2xl font-black text-black bg-gradient-to-r from-[#FF7A00] to-[#FFA133] hover:from-[#FFA133] hover:to-[#FF7A00] shadow-xl shadow-[#FF7A00]/25 transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer text-base font-heading tracking-wide"
+                className="px-7 py-3 rounded-full bg-[#FF7A00] hover:bg-[#FFA133] text-black font-bold text-sm transition-all duration-200 hover:scale-105 active:scale-95 shadow-lg shadow-[#FF7A00]/25 inline-flex items-center gap-2 cursor-pointer"
               >
-                <span>{locale === 'ar' ? 'استعرض قائمة الطعام' : 'Explore Menu'}</span>
-                <ArrowIcon className="w-4 h-4" />
-              </button>
-
-              <button
-                onClick={() => navigate('offers')}
-                className="w-full sm:w-auto px-8 py-4 rounded-2xl font-bold text-[#FFFFFF] bg-[#141416] hover:bg-[#1E1E22] border border-[#FF7A00]/40 hover:border-[#FF7A00] shadow-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer text-base"
-              >
-                <Tag className="w-4 h-4 text-[#FF7A00]" />
-                <span>{locale === 'ar' ? 'عروض الخصم 20%' : '20% OFF Deals'}</span>
+                <span>{isAr ? 'استكشف المنيو' : 'Explore Menu'}</span>
+                <Arrow className="w-4 h-4" />
               </button>
             </div>
 
-            {/* Trust Highlights Grid */}
-            <div className="pt-8 border-t border-[#26262B] grid grid-cols-3 gap-3 sm:gap-6 text-center lg:text-start">
-              <div className="flex flex-col gap-1">
-                <div className="flex items-center justify-center lg:justify-start gap-1.5 text-[#FF7A00]">
-                  <Tag className="w-5 h-5" />
-                  <span className="font-heading text-2xl text-[#FFFFFF]">-20%</span>
+            {/* Floating Pill Card (Exact style from reference design) */}
+            <div className="pt-4 max-w-md">
+              <div className="bg-[#121214] border border-[#222226] rounded-full p-2.5 sm:p-3 flex items-center justify-between shadow-2xl backdrop-blur-md">
+                {/* Left Part: Avatars & Text */}
+                <div className="flex items-center gap-3 ps-3">
+                  <div className="flex -space-x-2 rtl:space-x-reverse overflow-hidden">
+                    <span className="inline-block h-8 w-8 rounded-full ring-2 ring-[#121214] bg-[#FF7A00] text-black font-bold text-xs flex items-center justify-center">
+                      ★
+                    </span>
+                    <span className="inline-block h-8 w-8 rounded-full ring-2 ring-[#121214] bg-zinc-700 text-white font-bold text-[10px] flex items-center justify-center">
+                      50k
+                    </span>
+                    <span className="inline-block h-8 w-8 rounded-full ring-2 ring-[#121214] bg-[#FFA133] text-black font-bold text-[10px] flex items-center justify-center">
+                      ✓
+                    </span>
+                  </div>
+                  <div className="flex flex-col text-start">
+                    <span className="text-xs font-bold text-white">
+                      {isAr ? 'أشهى الأطباق والخصومات' : 'Great Food & Discounts'}
+                    </span>
+                    <span className="text-[10px] text-[#A1A1AA]">
+                      {isAr ? 'أكثر من 50,000 عميل سعيد' : 'Over 50,000 happy customers'}
+                    </span>
+                  </div>
                 </div>
-                <span className="text-xs text-[#A1A1AA] leading-tight">
-                  {locale === 'ar' ? 'خصم على البيتزا والفطائر' : 'Discount on Pizza & Pies'}
-                </span>
-              </div>
 
-              <div className="flex flex-col gap-1">
-                <div className="flex items-center justify-center lg:justify-start gap-1.5 text-[#FF7A00]">
-                  <Flame className="w-5 h-5" />
-                  <span className="font-heading text-2xl text-[#FFFFFF]">450°C</span>
-                </div>
-                <span className="text-xs text-[#A1A1AA] leading-tight">
-                  {locale === 'ar' ? 'فرن حطب بركاني' : 'Volcanic Wood Oven'}
-                </span>
-              </div>
+                {/* Divider notch */}
+                <div className="h-8 w-px bg-[#27272A] mx-2 hidden sm:block" />
 
-              <div className="flex flex-col gap-1">
-                <div className="flex items-center justify-center lg:justify-start gap-1.5 text-white">
-                  <Award className="w-5 h-5 text-[#FF7A00]" />
-                  <span className="font-heading text-2xl text-[#FFFFFF]">70+</span>
+                {/* Right Part: Discount Badge + Round Food Image */}
+                <div className="flex items-center gap-3 pe-2">
+                  <div className="text-end">
+                    <span className="text-base font-black text-[#FF7A00] block leading-none font-lalezar">
+                      20%
+                    </span>
+                    <span className="text-[9px] text-[#A1A1AA] uppercase tracking-wider block">
+                      {isAr ? 'خصم متاح' : 'OFF NOW'}
+                    </span>
+                  </div>
+
+                  <div className="w-11 h-11 rounded-full overflow-hidden border border-[#FF7A00]/50 bg-black shrink-0">
+                    <img
+                      src="/menu/البيتزا/بيتزا هاوس  2300.png"
+                      alt="Pizza House"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 </div>
-                <span className="text-xs text-[#A1A1AA] leading-tight">
-                  {locale === 'ar' ? 'صنف شهي ومتنوع' : 'Delicious Menu Items'}
-                </span>
               </div>
             </div>
           </div>
 
-          {/* Visual Showcase Card (5 cols) featuring Pizza House Logo */}
-          <div className="lg:col-span-5 relative flex items-center justify-center">
-            {/* Ambient Flame Ring */}
-            <div className="absolute -inset-4 rounded-full bg-gradient-to-tr from-[#FF7A00]/30 via-transparent to-transparent blur-3xl animate-pulse" />
+          {/* Right Column: Hero Round Dish Plate (5 cols) */}
+          <div className="lg:col-span-5 flex items-center justify-center relative">
+            {/* Ambient Radial Spotlight */}
+            <div className="absolute w-80 sm:w-96 h-80 sm:h-96 rounded-full bg-gradient-to-tr from-[#FF7A00]/25 to-transparent blur-3xl pointer-events-none" />
 
-            {/* Visual Logo Card */}
-            <div className="relative w-full max-w-[420px] aspect-square rounded-3xl bg-[#121214] border border-[#26262B] p-7 shadow-2xl backdrop-blur-xl flex flex-col items-center justify-center group overflow-hidden">
-              {/* Radial gradient inside */}
-              <div className="absolute inset-0 bg-radial-gradient opacity-90 pointer-events-none" />
-
-              {/* Pizza House Official Logo */}
-              <div className="relative w-64 h-64 sm:w-72 sm:h-72 transition-transform duration-500 group-hover:scale-105 flex items-center justify-center">
+            {/* Circular Plate Container */}
+            <div className="relative w-72 sm:w-96 md:w-[420px] aspect-square rounded-full flex items-center justify-center p-4">
+              <div className="w-full h-full rounded-full border border-white/5 bg-[#121214]/60 p-6 flex items-center justify-center shadow-2xl backdrop-blur-sm group">
                 <img
-                  src="/logo.png"
-                  alt="بيتزا هاوس Pizza House"
-                  className="w-full h-full object-contain drop-shadow-[0_15px_30px_rgba(255,122,0,0.35)]"
+                  src="/menu/البيتزا/بيتزا هاوس  2300.png"
+                  alt="بيتزا هاوس Special"
+                  className="w-full h-full object-contain filter drop-shadow-[0_25px_35px_rgba(0,0,0,0.85)] group-hover:scale-105 group-hover:rotate-3 transition-transform duration-700"
                 />
-              </div>
-
-              {/* Floating Discount Badge */}
-              <div className="absolute -bottom-2 -left-2 bg-[#18181B] border border-[#FF7A00]/40 px-4 py-2.5 rounded-2xl shadow-2xl flex items-center gap-2.5 backdrop-blur-md">
-                <div className="w-8 h-8 rounded-xl bg-[#FF7A00] flex items-center justify-center text-black font-black text-sm">
-                  %
-                </div>
-                <div className="flex flex-col text-start">
-                  <span className="text-xs font-black text-white font-heading">
-                    {locale === 'ar' ? 'خصم 20% متاح الآن' : '20% OFF Active'}
-                  </span>
-                  <span className="text-[10px] text-[#A1A1AA]">
-                    {locale === 'ar' ? 'على البيتزا والفطائر والسندوتشات' : 'Pizza, Fatayer & Subs'}
-                  </span>
-                </div>
-              </div>
-
-              {/* Floating Rating Badge */}
-              <div className="absolute -top-2 -right-2 bg-[#18181B] border border-[#26262B] px-3.5 py-2 rounded-2xl shadow-xl flex items-center gap-2 backdrop-blur-md">
-                <span className="text-[#FF7A00] text-sm font-bold">★★★★★</span>
-                <span className="text-xs font-black text-white font-heading">4.9 / 5</span>
               </div>
             </div>
           </div>
