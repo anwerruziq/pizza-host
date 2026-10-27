@@ -2,12 +2,12 @@ import React from "react";
 import "./globals.css";
 
 export const metadata = {
-  title: "PizzaZone | بيتزا نابولية أصلية مخبوزة على الحطب",
-  description: "مطعم بيتزا نابولية فاخرة في صنعاء. عجينة مخمرة 48 ساعة، ومخبوزة بأفران الحطب 450 درجة مئوية. تصفح قائمتنا واستمتع بمصمم البيتزا التفاعلي.",
-  keywords: ["بيتزا", "PizzaZone", "مطعم بيتزا", "بيتزا نابولية", "صنعاء", "قائمة طعام بيتزا", "ابنِ بيتزاك", "Pizza Restaurant Sanaa"],
+  title: "بيتزا هاوس | Pizza House - أشهى أنواع البيتزا والفطائر والسندوتشات",
+  description: "مطعم بيتزا هاوس (Pizza House) - أشهى وأطيب أنواع البيتزا، الفطائر، والسندوتشات الطازجة. تصفح قائمتنا واستفد من عروضنا الخاصة وخصم 20%.",
+  keywords: ["بيتزا هاوس", "Pizza House", "مطعم بيتزا", "فطائر", "سندوتشات", "صنعاء", "قائمة طعام"],
   openGraph: {
-    title: "PizzaZone | بيتزا نابولية أصلية مخبوزة على الحطب",
-    description: "أشهى أنواع البيتزا الإيطالية المخبوزة على الحطب مع مصمم بيتزا تفاعلي ساحر.",
+    title: "بيتزا هاوس | Pizza House",
+    description: "أشهى أنواع البيتزا والفطائر والسندوتشات مع خصم 20% وعروض حصرية.",
     locale: "ar_YE",
     type: "website",
   },
@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ar" dir="rtl" className="h-full antialiased selection:bg-[#E63920] selection:text-white">
+    <html lang="ar" dir="rtl" className="h-full antialiased selection:bg-[#FF7A00] selection:text-white">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

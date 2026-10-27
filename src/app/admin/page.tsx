@@ -84,7 +84,7 @@ function AdminContent() {
           </Link>
 
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-[#E63920]/20 text-[#E63920] flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-[#FF7A00]/20 text-[#FF7A00] flex items-center justify-center">
               <ShieldCheck className="w-5 h-5" />
             </div>
             <div>
@@ -99,7 +99,7 @@ function AdminContent() {
             onClick={toggleLocale}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#17171A] hover:bg-[#222227] border border-[#2A2A30] text-white cursor-pointer"
           >
-            <Globe className="w-3.5 h-3.5 text-[#FFB703]" />
+            <Globe className="w-3.5 h-3.5 text-[#FFA133]" />
             <span>{locale === 'ar' ? 'English' : 'عربي'}</span>
           </button>
         </div>
@@ -109,7 +109,7 @@ function AdminContent() {
       <div className="max-w-7xl mx-auto p-6 space-y-6">
         {/* Toast */}
         {toastMessage && (
-          <div className="fixed bottom-6 end-6 z-50 bg-[#E63920] text-white px-5 py-3 rounded-2xl shadow-2xl text-xs font-bold flex items-center gap-2 animate-in fade-in slide-in-from-bottom-4">
+          <div className="fixed bottom-6 end-6 z-50 bg-[#FF7A00] text-black px-5 py-3 rounded-2xl shadow-2xl text-xs font-bold flex items-center gap-2 animate-in fade-in slide-in-from-bottom-4">
             <Check className="w-4 h-4" />
             <span>{toastMessage}</span>
           </div>
@@ -123,19 +123,19 @@ function AdminContent() {
           </div>
           <div className="p-5 rounded-2xl bg-[#17171A] border border-[#2A2A30] space-y-1">
             <span className="text-xs text-[#A09D95]">{t.admin.statCategories}</span>
-            <span className="text-2xl font-black text-[#FFB703] block">
+            <span className="text-2xl font-black text-[#FFA133] block">
               {sampleCategories.length}
             </span>
           </div>
           <div className="p-5 rounded-2xl bg-[#17171A] border border-[#2A2A30] space-y-1">
             <span className="text-xs text-[#A09D95]">{t.admin.statOffers}</span>
-            <span className="text-2xl font-black text-emerald-400 block">
+            <span className="text-2xl font-black text-[#FFA133] block">
               {sampleOffers.length}
             </span>
           </div>
           <div className="p-5 rounded-2xl bg-[#17171A] border border-[#2A2A30] space-y-1">
             <span className="text-xs text-[#A09D95]">{t.admin.statUnavailable}</span>
-            <span className="text-2xl font-black text-[#E63920] block">
+            <span className="text-2xl font-black text-[#FFA133] block">
               {products.filter((p) => !p.isAvailable).length}
             </span>
           </div>
@@ -147,7 +147,7 @@ function AdminContent() {
             onClick={() => setActiveTab('products')}
             className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 ${
               activeTab === 'products'
-                ? 'bg-[#E63920] text-white shadow-md'
+                ? 'bg-[#FF7A00] text-black shadow-md'
                 : 'text-[#A09D95] hover:text-white'
             }`}
           >
@@ -158,7 +158,7 @@ function AdminContent() {
             onClick={() => setActiveTab('categories')}
             className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 ${
               activeTab === 'categories'
-                ? 'bg-[#E63920] text-white shadow-md'
+                ? 'bg-[#FF7A00] text-black shadow-md'
                 : 'text-[#A09D95] hover:text-white'
             }`}
           >
@@ -169,7 +169,7 @@ function AdminContent() {
             onClick={() => setActiveTab('offers')}
             className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 ${
               activeTab === 'offers'
-                ? 'bg-[#E63920] text-white shadow-md'
+                ? 'bg-[#FF7A00] text-black shadow-md'
                 : 'text-[#A09D95] hover:text-white'
             }`}
           >
@@ -188,7 +188,7 @@ function AdminContent() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder={locale === 'ar' ? 'بحث عن صنف...' : 'Search items...'}
-                  className="w-full py-2.5 px-9 rounded-xl bg-[#222227] text-xs text-white border border-[#2A2A30] focus:border-[#E63920] focus:outline-none"
+                  className="w-full py-2.5 px-9 rounded-xl bg-[#222227] text-xs text-white border border-[#2A2A30] focus:border-[#FF7A00] focus:outline-none"
                 />
                 <Search className="w-4 h-4 text-[#A09D95] absolute top-1/2 -translate-y-1/2 start-3" />
               </div>
@@ -226,14 +226,14 @@ function AdminContent() {
                           <div className="flex items-center gap-2">
                             <span>{name}</span>
                             {item.isFeatured && (
-                              <span className="px-1.5 py-0.5 rounded text-[9px] bg-[#E63920]/20 text-[#E63920] font-black">
+                              <span className="px-1.5 py-0.5 rounded text-[9px] bg-[#FF7A00]/20 text-[#FFA133] font-black">
                                 STAR
                               </span>
                             )}
                           </div>
                         </td>
                         <td className="py-3 px-3 text-[#A09D95]">{item.categorySlug}</td>
-                        <td className="py-3 px-3 font-black text-[#FFB703]">
+                        <td className="py-3 px-3 font-black text-[#FFA133]">
                           {formatCurrency(item.basePrice, locale, siteSettings.currencyCode)}
                         </td>
                         <td className="py-3 px-3">
@@ -257,8 +257,8 @@ function AdminContent() {
                             onClick={() => toggleProductAvailability(item.id)}
                             className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
                               item.isAvailable
-                                ? 'bg-[#222227] hover:bg-red-950 text-red-400 border border-red-500/20'
-                                : 'bg-[#222227] hover:bg-emerald-950 text-emerald-400 border border-emerald-500/20'
+                                ? 'bg-[#222227] hover:bg-zinc-800 text-[#A09D95] border border-zinc-700'
+                                : 'bg-[#FF7A00] hover:bg-[#FFA133] text-black font-bold'
                             }`}
                           >
                             {item.isAvailable
@@ -291,7 +291,7 @@ function AdminContent() {
                   <h3 className="font-bold text-white text-base">
                     {locale === 'ar' ? c.nameAr : c.nameEn}
                   </h3>
-                  <span className="px-2 py-0.5 rounded-md bg-[#222227] text-xs text-[#FFB703] font-bold">
+                  <span className="px-2 py-0.5 rounded-md bg-[#222227] text-xs text-[#FFA133] font-bold">
                     {c.itemCount} {locale === 'ar' ? 'صنف' : 'items'}
                   </span>
                 </div>
@@ -311,7 +311,7 @@ function AdminContent() {
                 key={o.id}
                 className="p-6 rounded-3xl bg-[#17171A] border border-[#2A2A30] space-y-3"
               >
-                <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-[#E63920] text-white">
+                <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-[#FF7A00] text-black">
                   {locale === 'ar' ? o.badgeAr : o.badgeEn}
                 </span>
                 <h3 className="text-lg font-bold text-white">
@@ -324,7 +324,7 @@ function AdminContent() {
                   <span className="text-xs line-through text-[#6E6B65]">
                     {formatCurrency(o.originalPrice, locale, siteSettings.currencyCode)}
                   </span>
-                  <span className="text-lg font-black text-[#FFB703]">
+                  <span className="text-lg font-black text-[#FFA133]">
                     {formatCurrency(o.offerPrice, locale, siteSettings.currencyCode)}
                   </span>
                 </div>

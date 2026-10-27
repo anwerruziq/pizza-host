@@ -25,7 +25,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   // Initialize from localStorage if available
   useEffect(() => {
     try {
-      const saved = localStorage.getItem('pizzazone_locale') as Locale | null;
+      const saved = (localStorage.getItem('pizzahouse_locale') || localStorage.getItem('pizzazone_locale')) as Locale | null;
       if (saved && (saved === 'ar' || saved === 'en')) {
         setLocaleState(saved);
       }
@@ -40,7 +40,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     root.setAttribute('lang', locale);
     root.setAttribute('dir', locale === 'ar' ? 'rtl' : 'ltr');
     try {
-      localStorage.setItem('pizzazone_locale', locale);
+      localStorage.setItem('pizzahouse_locale', locale);
     } catch {
       // ignore
     }

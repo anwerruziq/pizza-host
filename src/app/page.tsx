@@ -18,12 +18,12 @@ function PizzeriaApp() {
     ''
   )}?text=${encodeURIComponent(
     locale === 'ar'
-      ? 'مرحباً PizzaZone! أود الاستفسار عن القائمة والطلب المباشر.'
-      : 'Hello PizzaZone! I would like to inquire about the menu and order.'
+      ? 'مرحباً بيتزا هاوس! أود الاستفسار عن القائمة والطلب المباشر.'
+      : 'Hello Pizza House! I would like to inquire about the menu and order.'
   )}`;
 
   return (
-    <div className="min-h-screen bg-[#0D0D0E] text-[#F7F4EF] flex flex-col selection:bg-[#E63920] selection:text-white">
+    <div className="min-h-screen bg-[#0A0A0C] text-[#FFFFFF] flex flex-col selection:bg-[#FF7A00] selection:text-white">
       <Navbar />
       <main className="flex-1">
         <Hero />

@@ -34,8 +34,9 @@ export interface PizzaSizeOption {
   code: 'S' | 'M' | 'L' | 'XL';
   labelAr: string;
   labelEn: string;
-  diameterCm: number;
-  price: number;
+  diameterCm?: number;
+  price: number; // Discounted final price
+  originalPrice?: number; // Price before discount
 }
 
 export interface PizzaToppingOption {
@@ -55,7 +56,10 @@ export interface Product {
   descriptionAr: string;
   descriptionEn: string;
   image: string;
-  basePrice: number; // Stored in integer YER
+  basePrice: number; // Final discounted price in YER
+  originalPrice?: number; // Pre-discount price in YER
+  hasDiscount?: boolean; // True if item has 20% discount (Pizza, Fatayer, Sandwiches)
+  discountPercentage?: number; // Default 20
   isAvailable: boolean;
   isFeatured: boolean;
   status: 'published' | 'draft';
@@ -149,29 +153,29 @@ export interface ContentBlock {
 }
 
 export interface ThemeConfig {
-  primaryColor: string; // e.g. #E63920
-  secondaryColor: string; // e.g. #FFB703
-  bgColor: string; // e.g. #0F0F11
-  surfaceColor: string; // e.g. #1B1B1E
-  textColor: string; // e.g. #F7F4EF
-  brandName: string; // e.g. PizzaZone
+  primaryColor: string;
+  secondaryColor: string;
+  bgColor: string;
+  surfaceColor: string;
+  textColor: string;
+  brandName: string;
   buttonRadius: 'sm' | 'md' | 'lg' | 'full';
   heroTaglineAr: string;
   heroTaglineEn: string;
 }
 
 export interface SiteSettings {
-  brandName: string;
-  currencyCode: string;
-  currencySymbolAr: string;
-  currencySymbolEn: string;
+  restaurantNameAr: string;
+  restaurantNameEn: string;
   phone: string;
   whatsapp: string;
-  email: string;
   addressAr: string;
   addressEn: string;
-  openingHoursAr: string;
-  openingHoursEn: string;
+  openHoursAr: string;
+  openHoursEn: string;
+  currencyAr: string;
+  currencyEn: string;
+  currencyCode: string;
   mapEmbedUrl: string;
   socials: {
     facebook?: string;

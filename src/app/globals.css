@@ -1,18 +1,27 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Lalezar';
+  src: url('/Lalezar-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  --color-primary: #E63920;
-  --color-primary-hover: #FF472A;
-  --color-secondary: #FFB703;
-  --color-secondary-hover: #FFA200;
-  --color-bg-dark: #0D0D0E;
-  --color-surface-dark: #17171A;
-  --color-surface-elevated: #222227;
-  --color-border-dark: #2A2A30;
-  --color-border-glow: rgba(230, 57, 32, 0.35);
-  --color-text-primary: #F7F4EF;
-  --color-text-secondary: #A09D95;
-  --color-text-muted: #6E6B65;
+  --color-primary: #FF7A00;
+  --color-primary-hover: #FF9029;
+  --color-secondary: #FFA133;
+  --color-secondary-hover: #EA580C;
+  --color-bg-dark: #0A0A0C;
+  --color-surface-dark: #121214;
+  --color-surface-elevated: #18181C;
+  --color-border-dark: #26262B;
+  --color-border-glow: rgba(255, 122, 0, 0.35);
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #D4D4D8;
+  --color-text-muted: #82828C;
+  --font-heading: 'Lalezar', cursive, sans-serif;
   --font-arabic: 'Tajawal', 'Cairo', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-latin: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
@@ -48,6 +57,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Typography Headings with Lalezar */
+h1, h2, h3, h4, h5, h6, .font-heading, .font-lalezar {
+  font-family: 'Lalezar', cursive, sans-serif;
+  letter-spacing: 0.02em;
+}
+
 /* Custom Scrollbars */
 ::-webkit-scrollbar {
   width: 8px;
@@ -55,41 +70,62 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0D0D0E;
+  background: #0A0A0C;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2A2A30;
+  background: #26262B;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #E63920;
+  background: #FF7A00;
 }
 
-/* Wood fired oven glows */
+/* Discount Sticker Styling */
+.discount-sticker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: linear-gradient(135deg, #FF7A00 0%, #EA580C 100%);
+  color: #FFFFFF;
+  font-family: 'Lalezar', cursive, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  box-shadow: 0 4px 14px rgba(255, 122, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transform: rotate(-2deg);
+  transition: transform 0.2s ease;
+}
+
+.discount-sticker:hover {
+  transform: rotate(0deg) scale(1.05);
+}
+
+/* Glow effects in Black & Orange */
 .fire-glow {
-  box-shadow: 0 0 35px -5px rgba(230, 57, 32, 0.65), 0 0 15px -2px rgba(255, 183, 3, 0.4);
+  box-shadow: 0 0 35px -5px rgba(255, 122, 0, 0.65), 0 0 15px -2px rgba(255, 161, 51, 0.4);
 }
 
-.gold-glow {
-  box-shadow: 0 0 25px -4px rgba(255, 183, 3, 0.5);
+.orange-glow {
+  box-shadow: 0 0 25px -4px rgba(255, 122, 0, 0.5);
 }
 
 .surface-glow {
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7), 0 0 1px 1px rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.9), 0 0 1px 1px rgba(255, 255, 255, 0.06);
 }
 
-/* Subtle background noise texture */
 .bg-radial-gradient {
-  background: radial-gradient(circle at 50% 20%, rgba(230, 57, 32, 0.12) 0%, rgba(13, 13, 14, 0) 70%);
+  background: radial-gradient(circle at 50% 20%, rgba(255, 122, 0, 0.15) 0%, rgba(10, 10, 12, 0) 70%);
 }
 
 .bg-radial-golden {
-  background: radial-gradient(circle at 50% 50%, rgba(255, 183, 3, 0.08) 0%, rgba(13, 13, 14, 0) 60%);
+  background: radial-gradient(circle at 50% 50%, rgba(255, 161, 51, 0.08) 0%, rgba(10, 10, 12, 0) 60%);
 }
 
-/* Pizza visualizer rotations and animations */
+/* Animations */
 @keyframes flameFlicker {
   0%, 100% {
     transform: scale(1) translateY(0);
@@ -101,42 +137,26 @@ body {
   }
 }
 
-@keyframes ovenBake {
-  0% {
-    filter: brightness(1) drop-shadow(0 0 0 rgba(230,57,32,0));
-  }
-  50% {
-    filter: brightness(1.3) drop-shadow(0 0 40px rgba(255,183,3,0.85));
-  }
-  100% {
-    filter: brightness(1.05) drop-shadow(0 0 15px rgba(230,57,32,0.4));
-  }
-}
-
 .animate-flame {
   animation: flameFlicker 1.6s ease-in-out infinite;
 }
 
-.animate-baking {
-  animation: ovenBake 2.5s ease-in-out forwards;
-}
-
 /* Glassmorphism */
 .glass-panel {
-  background: rgba(23, 23, 26, 0.85);
+  background: rgba(18, 18, 20, 0.88);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .glass-nav {
-  background: rgba(13, 13, 14, 0.88);
+  background: rgba(10, 10, 12, 0.92);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* Direction aware padding / alignment classes */
+/* Direction aware font */
 [dir="rtl"] {
   font-family: var(--font-arabic);
 }
